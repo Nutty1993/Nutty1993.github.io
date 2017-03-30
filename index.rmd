@@ -1,0 +1,117 @@
+---
+title: "Мой отчет"
+author: "Баранова М.Н."
+date: '30 марта 2017 г '
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 1 zadanie
+
+Вычислить среднее для каждой колонки таблицы iris, за исключением колонки “Species” и соберите результат в список (list).
+
+```{r}
+zan1 = list(mean(iris$Sepal.Length), mean(iris$Sepal.Width), mean(iris$Petal.Length), mean(iris$Petal.Width))
+zan1 
+names(zan1) = c("Длина чашелистиков", "Ширина чашелистиков", "Длина лепестков", "Ширина лепестков")
+zan1
+```
+
+## 2 zadanie
+
+Вычислить среднее для каждой строки, исключив перед этим колонку “Species” и сохраните результат в векторе.
+
+``` {r} 
+z=iris 
+z$Species=NULL 
+z 
+z[1,1:4] 
+sum(z[1,1:4]) 
+sum(z[1,1:4])/4 
+y=0 
+for(i in 1:150) 
+{x = sum(z[i,1:4])/4 
+y = c(x,y)} 
+y 
+```
+
+##zadanie 3
+
+Создайте случайные 1000 нуклеотидов, сохранив их в вектор DNA, посчитайте количество нуклеотидов A и T, их долю от общей длинны ДНК и запишите результат в вектор ‘dna_at’
+
+``` {r}
+DNA = c("A","C","G","T") 
+DNA = sample(DNA, size = 1000, replace = T); DNA 
+DNA = factor(DNA) 
+DNA 
+summary(DNA) 
+length(DNA) 
+dna_at = c(summary(DNA)) 
+dna_at = dna_at[c("A","T")] 
+dna_at 
+y = dna_at/1000 
+y 
+dna_at = c(dna_at, y) 
+dna_at 
+```
+
+##zadanie 4
+
+Создайте векто в котором записан произвольный набор латинских букв длинной не менее 10000 символов и посчитайте количество гласных.
+
+``` {r}
+LETTERS
+abc = sample(LETTERS, 10000, T)
+v=0
+for(i in 1:length(abc))
+{if(abc[i]=="A"|abc[i]=="E"|abc[i]=="I"|abc[i]=="O"|abc[i]=="U"|abc[i]=="Y")
+{v=v+1} else {v=v+0}}
+v
+```
+
+##zadanie 5
+
+Отсортируйте все виды в таблице iris по средней длинне лепестков. Результат должен быть фактором с градациями в виде имен видов с правильной последовательностью уровней.
+
+``` {r}
+iris 
+x = iris 
+x$Sepal.Length = NULL 
+x$Sepal.Width = NULL 
+x$Petal.Width = NULL 
+x 
+x[1:50,1] 
+mean(x[1:50,1]) 
+setosa = mean(x[1:50,1]) 
+versicolor = mean(x[51:100,1]) 
+versicolor 
+virginica = mean(x[101:150,1]) 
+virginica 
+spec = c(setosa, versicolor, virginica) 
+spec 
+names(spec) = c("setosa","versicolor","virginica") 
+spec 
+sort(spec) 
+```
+
+##zadanie 6
+
+Напишите функцию для рассчета медианы вектора.
+
+``` {r}
+x = c(21, 34, -1, -10, 0, 38, 19, 2)
+median(x)
+x = c(21, 34, -1, -10, 0, 38, 19, 2)
+x = sort(x)
+x
+x[(length(x)/2)]
+x[round(length(x)/2)]
+med = function(p)
+{sort(p)
+return(p[round(length(p)/2)])}
+x
+med(x)
+``` 
